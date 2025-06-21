@@ -1,11 +1,11 @@
 import {createQuestion} from '../model/mongodbmodel/createQuestion.js'
-import {getOneQuestion, getQuestion} from '../model/mongodbmodel/getQuestion.js'
+import {getOneQuestion, getSchema, getQuestion} from '../model/mongodbmodel/getQuestion.js'
 import { deleteQuestion } from '../model/mongodbmodel/deleteQuestion.js';
 
 export async function createQuestionContoller(req,res){
   console.log(req.body, "controller");
     try {
-        await createQuestion(req.body);
+        const id = await createQuestion(req.body);
         res.json({msg: true});
     } catch(err) {
         console.log(err.message);
@@ -30,6 +30,17 @@ export async function getOneQuestionController(req,res){
     res.json(ques);
   }
   catch(err){
+    console.log(err);
+  }
+}
+
+export async function getSchemaController(req,res){
+  const id = req.params.id;
+  try{
+    const schema = await getSchema(id);
+    console.log(schema);
+    res.json(schema);
+  }catch(err){
     console.log(err);
   }
 }

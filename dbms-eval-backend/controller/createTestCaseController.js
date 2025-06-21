@@ -1,40 +1,52 @@
-import {insertInputSchema} from '../model/mongodbmodel/insertInputSchema.js'
-import {insertOutputSchema} from '../model/mongodbmodel/insertOutputSchema.js'
+import { insertTestCase } from "../model/mongodbmodel/insertTestCase.js";
+import { getTestCases } from "../model/mongodbmodel/getTestCases.js";
+import { deleteTestCase } from "../model/mongodbmodel/deleteTestCase.js";
+import { getOneTestCase } from "../model/mongodbmodel/getOneTestCase.js";
 
-export async function createInputSchemaController(req,res){
-  const {id,tableName,columns,tableData} = req.body;
-  console.log({tableName,columns})
-  if(!tableName||!Array.isArray(columns)||columns.length===0){
-    res.status(400).send({msg:"Error invalid table schema"});
-  }
-  if(!Array.isArray(tableData)||tableData.length===0){
-    res.status(400).send({msg:"Error table data is empty"});
-  }
+export async function addTestCaseController(req,res){
   try{
-    const docs = await insertInputSchema(id,tableName,columns,tableData);
-    if(docs){
+    const {questionId,input,output,hidden} = req.body;
+    const msg = await insertTestCase({questionId,input,output,hidden});
+    if(msg){
       res.json({msg: true});
+    }else{
+      res.json({msg: false});
     }
   }catch(err){
     console.log(err);
-  } 
+  }
 }
 
-export async function createOutputSchemaController(req,res){
-  const {id,tableName,columns,tableData} = req.body;
-  console.log({id,tableName,columns,tableData})
-  console.log({tableName,columns})
-  if(!tableName||!Array.isArray(columns)||columns.length===0){
-    res.status(400).send({msg:"Error invalid table schema"});
-  }
-  if(!Array.isArray(tableData)||tableData.length===0){
-    res.status(400).send({msg:"Error table data is empty"});
-  }
+export async function getTestCaseController(req,res){
   try{
-    const docs = await insertOutputSchema(id,tableName,columns,tableData);
-    res.json({msg: true});
+    const id = req.params.id;
+    const docs = await getTestCases(id);
+    res.json(docs);
   }catch(err){
     console.log(err);
-  } 
+  }
 }
 
+export async function getOneTestCaseController(req,res){
+  try{
+    const id = req.params.id;
+    const docs = await getOneTestCase(id);
+    res.json(docs);
+  }catch(err){
+    console.log(err);
+  }
+}
+
+export async function deleteTestCaseController(req,res){
+  try{
+    const id = req.params.id;
+    const docs = await deleteTestCase(id);
+    if(docs){
+      res.json({msg: true});
+    }else{
+      res.json({msg: false});
+    }
+  }catch(err){
+    console.log(err);
+  }
+}

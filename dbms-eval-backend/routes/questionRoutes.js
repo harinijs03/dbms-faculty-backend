@@ -10,6 +10,8 @@ router.get('/getquestions',controller.getQuestionController);
 
 router.get('/getoneques/:id',controller.getOneQuestionController);
 
+router.get('/getoneschema/:id',controller.getSchemaController);
+
 router.put('/editquestion/:id',editController.editQuestionController);
 
 router.delete('/deletequestion/:id',controller.deleteQuestionContoller);

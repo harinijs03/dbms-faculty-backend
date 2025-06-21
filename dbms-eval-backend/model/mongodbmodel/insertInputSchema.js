@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import InputTestCaseSchema from "./InputTestCaseSchema.js";
+import TestCaseSchema from "./TestCaseSchema.js";
 
 export async function insertInputSchema(id, tableName, columnSchema, tableData) {
     try{

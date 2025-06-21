@@ -1,10 +1,11 @@
 import Question from './QuestionSchema.js'
 
 export async function createQuestion(ques){
-  const newQuestion = new Question(ques);
-  await newQuestion.save().then(()=>{
-    console.log("New Question Created");
-  }).catch(err=>{
+  try{
+    const newQuestion = new Question(ques);
+    const addedQuestion = await newQuestion.save();
+    return addedQuestion._id;
+  }catch(err){
     console.log(err);
-  })
+  }
 }

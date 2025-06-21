@@ -1,4 +1,5 @@
 import Question from './QuestionSchema.js';
+import { deleteTestCasesByQuesId } from './deleteTestCase.js';
 
 export async function deleteQuestion(id) {
   try {
@@ -6,7 +7,8 @@ export async function deleteQuestion(id) {
       throw new Error('No ID provided for deletion');
     }
 
-    const result = await Question.findOneAndDelete({ id: id }).exec();
+    const result = await Question.findOneAndDelete({ _id: id }).exec();
+    const tresult = await deleteTestCasesByQuesId(id);
     
     if (!result) {
       console.log(`No question found with id: ${id}`);

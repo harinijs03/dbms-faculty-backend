@@ -3,7 +3,7 @@ import Question from "./QuestionSchema.js"
 export async function editQuestion(id,ques){
   try{
     const updatedQuestion = await Question.findOneAndUpdate({
-      id: id,
+      _id: id,
     },
     {
       $set: ques
