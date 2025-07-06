@@ -1,0 +1,22 @@
+{
+  "name": "dbms-faculty-backend-f_v",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.0",
+    "dotenv-flow": "^4.1.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.16.1",
+    "oracledb": "^6.8.0"
+  },
+  "type": "module"
+}
